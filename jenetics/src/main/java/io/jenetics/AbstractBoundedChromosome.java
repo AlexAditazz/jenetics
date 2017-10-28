@@ -22,6 +22,7 @@ package io.jenetics;
 import static io.jenetics.internal.util.Equality.eq;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 import io.jenetics.internal.util.Equality;
 import io.jenetics.internal.util.Hash;
@@ -32,13 +33,10 @@ import io.jenetics.util.IntRange;
  * Abstract chromosome for {@code BoundedGene}s.
  *
  * @author <a href="mailto:franz.wilhelmstoetter@gmail.com">Franz Wilhelmstötter</a>
- * @version 1.6
+ * @version !__version__!
  * @since 1.6
  */
-abstract class AbstractBoundedChromosome<
-	A extends Comparable<? super A>,
-	G extends AbstractBoundedGene<A, G>
->
+abstract class AbstractBoundedChromosome<A, G extends AbstractBoundedGene<A, G>>
 	extends VariableChromosome<G>
 	implements BoundedChromosome<A, G>, Serializable
 {
@@ -54,6 +52,11 @@ abstract class AbstractBoundedChromosome<
 	 * The maximum value of this {@code BoundedChromosome}.
 	 */
 	final A _max;
+
+	/**
+	 * The comparator used for comparing the allele.
+	 */
+	final Comparator<A> _comparator;
 
 	/**
 	 * Create a new chromosome from the given genes array.
@@ -73,6 +76,7 @@ abstract class AbstractBoundedChromosome<
 		super(genes, lengthRange);
 		_min = genes.get(0)._min;
 		_max = genes.get(0)._max;
+		_comparator = genes.get(0).comparator();
 	}
 
 	@Override
@@ -83,6 +87,11 @@ abstract class AbstractBoundedChromosome<
 	@Override
 	public A getMax() {
 		return _max;
+	}
+
+	@Override
+	public Comparator<A> comparator() {
+		return _comparator;
 	}
 
 	@Override

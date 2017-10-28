@@ -24,6 +24,7 @@ import static io.jenetics.util.RandomRegistry.getRandom;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.Comparator;
 import java.util.Random;
 
 import io.jenetics.NumericGene;
@@ -86,6 +87,11 @@ public final class BigIntegerGene
 	@Override
 	public BigInteger getMax() {
 		return _max;
+	}
+
+	@Override
+	public Comparator<BigInteger> comparator() {
+		return BigInteger::compareTo;
 	}
 
 	@Override

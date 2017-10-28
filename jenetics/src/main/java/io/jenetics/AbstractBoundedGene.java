@@ -23,6 +23,7 @@ import static java.util.Objects.requireNonNull;
 import static io.jenetics.internal.util.Equality.eq;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 import io.jenetics.internal.util.Equality;
 import io.jenetics.internal.util.Hash;
@@ -32,13 +33,10 @@ import io.jenetics.internal.util.Hash;
  * value.
  *
  * @author <a href="mailto:franz.wilhelmstoetter@gmail.com">Franz Wilhelmstötter</a>
- * @version 1.6
+ * @version !__version__!
  * @since 1.6
  */
-abstract class AbstractBoundedGene<
-	A extends Comparable<? super A>,
-	G extends AbstractBoundedGene<A, G>
->
+abstract class AbstractBoundedGene<A, G extends AbstractBoundedGene<A, G>>
 	implements BoundedGene<A, G>, Serializable
 {
 
@@ -59,6 +57,8 @@ abstract class AbstractBoundedGene<
 	 */
 	final A _value;
 
+	final Comparator<A> _comparator;
+
 	// Holds the valid state of the gene.
 	private final boolean _valid;
 
@@ -66,19 +66,23 @@ abstract class AbstractBoundedGene<
 	 * Create new {@code BoundedGene}.
 	 *
 	 * @param value The value of the gene.
-	 * @param min The allowed min value of the gene.
-	 * @param max The allows max value of the gene.
+	 * @param min The allowed min value of the gene
+	 * @param max The allows max value of the gene
+	 * @param comparator the comparator used for comparing the allele
 	 * @throws NullPointerException if one of the given arguments is {@code null}.
 	 */
 	protected AbstractBoundedGene(
 		final A value,
 		final A min,
-		final A max
+		final A max,
+		final Comparator<A> comparator
 	) {
 		_min = requireNonNull(min, "Min value not be null.");
 		_max = requireNonNull(max, "Max value must not be null.");
 		_value = requireNonNull(value, "Gene value must not be null.");
-		_valid = _value.compareTo(min) >= 0 && _value.compareTo(max) <= 0;
+		_comparator = requireNonNull(comparator);
+		_valid = _comparator.compare(value, min) >= 0 &&
+				_comparator.compare(_value, max) <= 0;
 	}
 
 	@Override
@@ -94,6 +98,11 @@ abstract class AbstractBoundedGene<
 	@Override
 	public A getMax() {
 		return _max;
+	}
+
+	@Override
+	public Comparator<A> comparator() {
+		return _comparator;
 	}
 
 	@Override

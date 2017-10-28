@@ -19,6 +19,8 @@
  */
 package io.jenetics;
 
+import java.util.Comparator;
+
 /**
  * Base interface for genes where the alleles are bound by a minimum and a
  * maximum value.
@@ -29,12 +31,16 @@ package io.jenetics;
  * @since 1.6
  * @version 3.0
  */
-public interface BoundedGene<
-	A extends Comparable<? super A>,
-	G extends BoundedGene<A, G>
->
+public interface BoundedGene<A, G extends BoundedGene<A, G>>
 	extends Gene<A, G>, Comparable<G>
 {
+
+	/**
+	 * Return the comparator used for comparing the allele type {@code A}.
+	 *
+	 * @return the comparator used for comparing the allele type {@code A}
+	 */
+	public Comparator<A> comparator();
 
 	/**
 	 * Return the allowed min value.
@@ -53,13 +59,13 @@ public interface BoundedGene<
 	@Override
 	public default boolean isValid() {
 		return
-			getAllele().compareTo(getMin()) >= 0 &&
-			getAllele().compareTo(getMax()) <= 0;
+			comparator().compare(getAllele(), getMin()) >= 0 &&
+			comparator().compare(getAllele(), getMax()) <= 0;
 	}
 
 	@Override
 	public default int compareTo(final G other) {
-		return getAllele().compareTo(other.getAllele());
+		return comparator().compare(getAllele(), other.getAllele());
 	}
 
 	/**

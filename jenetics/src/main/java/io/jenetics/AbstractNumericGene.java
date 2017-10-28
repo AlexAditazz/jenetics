@@ -20,16 +20,17 @@
 package io.jenetics;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 /**
  * Abstract base class for implementing concrete NumericGenes.
  *
  * @author <a href="mailto:franz.wilhelmstoetter@gmail.com">Franz Wilhelmstötter</a>
- * @version 1.6
+ * @version !__version__!
  * @since 1.6
  */
 abstract class AbstractNumericGene<
-	N extends Number & Comparable<? super N>,
+	N extends Number,
 	G extends AbstractNumericGene<N, G>
 >
 	extends AbstractBoundedGene<N, G>
@@ -43,11 +44,17 @@ abstract class AbstractNumericGene<
 	 * @param value The value of the gene.
 	 * @param min The allowed min value of the gene.
 	 * @param max The allows max value of the gene.
+	 * @param comparator the comparator used for comparing the allele
 	 * @throws NullPointerException if one of the given arguments is
 	 *         {@code null}.
 	 */
-	protected AbstractNumericGene(final N value, final N min, final N max) {
-		super(value, min, max);
+	protected AbstractNumericGene(
+		final N value,
+		final N min,
+		final N max,
+		final Comparator<N> comparator
+	) {
+		super(value, min, max, comparator);
 	}
 
 	@Override

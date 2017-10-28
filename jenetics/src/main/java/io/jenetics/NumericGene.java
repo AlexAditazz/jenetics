@@ -28,10 +28,7 @@ package io.jenetics;
  * @since 1.6
  * @version 3.0
  */
-public interface NumericGene<
-	N extends Number & Comparable<? super N>,
-	G extends NumericGene<N, G>
->
+public interface NumericGene<N extends Number, G extends NumericGene<N, G>>
 	extends
 		BoundedGene<N, G>,
 		Comparable<G>

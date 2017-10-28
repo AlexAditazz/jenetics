@@ -69,7 +69,7 @@ public final class IntegerGene
 	 * @throws NullPointerException if one of the arguments is {@code null}.
 	 */
 	IntegerGene(final Integer value, final Integer min, final Integer max) {
-		super(value, min, max);
+		super(value, min, max, Integer::compare);
 	}
 
 	@Override

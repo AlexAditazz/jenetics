@@ -26,6 +26,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.Comparator;
 
 import io.jenetics.AbstractChromosome;
 import io.jenetics.DoubleGene;
@@ -40,7 +41,7 @@ import io.jenetics.util.MSeq;
  * Numeric chromosome implementation which holds arbitrary sized integer numbers.
  *
  * @author <a href="mailto:franz.wilhelmstoetter@gmail.com">Franz Wilhelmstötter</a>
- * @version 3.5
+ * @version !__version__!
  * @since 3.5
  */
 public class BigIntegerChromosome
@@ -109,6 +110,11 @@ public class BigIntegerChromosome
 	@Override
 	public BigInteger getMax() {
 		return _max;
+	}
+
+	@Override
+	public Comparator<BigInteger> comparator() {
+		return BigInteger::compareTo;
 	}
 
 	@Override

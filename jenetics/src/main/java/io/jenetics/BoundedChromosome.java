@@ -19,6 +19,8 @@
  */
 package io.jenetics;
 
+import java.util.Comparator;
+
 /**
  * Chromosome interface for {@code BoundedGene}s.
  *
@@ -28,12 +30,16 @@ package io.jenetics;
  * @version 3.9
  * @since 1.6
  */
-public interface BoundedChromosome<
-	A extends Comparable<? super A>,
-	G extends BoundedGene<A, G>
->
+public interface BoundedChromosome<A, G extends BoundedGene<A, G>>
 	extends Chromosome<G>
 {
+
+	/**
+	 * Return the comparator used for comparing the allele type {@code A}.
+	 *
+	 * @return the comparator used for comparing the allele type {@code A}
+	 */
+	public Comparator<A> comparator();
 
 	/**
 	 * Return the minimum value of this {@code BoundedChromosome}.

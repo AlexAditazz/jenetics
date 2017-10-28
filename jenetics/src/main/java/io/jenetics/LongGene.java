@@ -70,7 +70,7 @@ public final class LongGene
 	 * @throws NullPointerException if one of the arguments is {@code null}.
 	 */
 	LongGene(final Long value, final Long min, final Long max) {
-		super(value, min, max);
+		super(value, min, max, Long::compare);
 	}
 
 	@Override

@@ -70,7 +70,7 @@ public final class DoubleGene
 	 * @throws NullPointerException if one of the arguments is {@code null}.
 	 */
 	DoubleGene(final Double value, final Double min, final Double max) {
-		super(value, min, max);
+		super(value, min, max, Double::compare);
 	}
 
 	@Override
