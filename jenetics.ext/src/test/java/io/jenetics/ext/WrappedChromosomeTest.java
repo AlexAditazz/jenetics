@@ -15,7 +15,7 @@
  * limitations under the License.
  *
  * Author:
- *    Franz Wilhelmstötter (franz.wilhelmstoetter@gmx.at)
+ *    Franz Wilhelmstötter (franz.wilhelmstoetter@gmail.at)
  */
 package io.jenetics.ext;
 
@@ -28,7 +28,7 @@ import io.jenetics.Mutator;
 import io.jenetics.engine.Engine;
 
 /**
- * @author <a href="mailto:franz.wilhelmstoetter@gmx.at">Franz Wilhelmstötter</a>
+ * @author <a href="mailto:franz.wilhelmstoetter@gmail.at">Franz Wilhelmstötter</a>
  */
 public class WrappedChromosomeTest {
 

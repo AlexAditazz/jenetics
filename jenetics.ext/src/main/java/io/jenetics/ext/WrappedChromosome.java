@@ -29,7 +29,7 @@ import io.jenetics.internal.util.Lazy;
 import io.jenetics.util.ISeq;
 
 /**
- * @author <a href="mailto:franz.wilhelmstoetter@gmx.at">Franz Wilhelmstötter</a>
+ * @author <a href="mailto:franz.wilhelmstoetter@gmail.at">Franz Wilhelmstötter</a>
  * @version !__version__!
  * @since !__version__!
  */
