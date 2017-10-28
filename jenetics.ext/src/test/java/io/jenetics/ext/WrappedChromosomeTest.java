@@ -19,13 +19,28 @@
  */
 package io.jenetics.ext;
 
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
+
 import org.testng.annotations.Test;
 
+import io.jenetics.Chromosome;
 import io.jenetics.DoubleChromosome;
+import io.jenetics.DoubleGene;
+import io.jenetics.Gene;
 import io.jenetics.Genotype;
 import io.jenetics.IntegerChromosome;
+import io.jenetics.IntegerGene;
 import io.jenetics.Mutator;
+import io.jenetics.NumericGene;
+import io.jenetics.engine.Codec;
 import io.jenetics.engine.Engine;
+import io.jenetics.engine.EvolutionResult;
+import io.jenetics.engine.EvolutionStream;
+import io.jenetics.engine.Limits;
+import io.jenetics.engine.Problem;
+import io.jenetics.util.Factory;
 
 /**
  * @author <a href="mailto:franz.wilhelmstoetter@gmail.at">Franz Wilhelmstötter</a>
@@ -50,5 +65,70 @@ public class WrappedChromosomeTest {
 			.build();
 
 	}
+
+	@Test
+	public void foo() {
+		//final Genotype<NumericGene<Number, NumericGene<?, ?>>>
+
+		NumericGene<Double, DoubleGene> dg = DoubleGene.of(0, 1);
+		NumericGene<Integer, IntegerGene> ig = IntegerGene.of(0, 1);
+
+		NumericGene<? extends Number, ?> ag = ig;
+		ag = dg;
+
+		Genotype<? extends NumericGene<? extends Number, ?>> gt = null;
+
+		Engine<? extends NumericGene<? extends Number, ?>, Double> engine = null;
+		EvolutionStream<? extends NumericGene<? extends Number, ?>, Double> stream = engine.stream();
+
+//		stream
+//			.limit(Limits.bySteadyFitness(12))
+//			.collect(EvolutionResult.toBestGenotype());
+
+
+		//		final Genotype<NumericGene<? extends Number, ?>> genotype = of(
+//			DoubleChromosome.of(0.0, 1.0),
+//			IntegerChromosome.of(0, 19)
+//		);
+//
+//		final Codec<Double, ? extends NumericGene<? extends Number, ?>> codec =
+//			Codec.of(
+//				genotype,
+//				gt -> 0.0
+//			);
+
+		/*
+		final Problem<double[], ? extends NumericGene<? extends Number, ?>, Double> problem = Problem.of(
+			array -> 0.0,
+			codec
+		);
+
+		final Engine<? extends NumericGene<? extends Number, ?>, Double> engine =
+			Engine.builder(g -> 0.0, codec).build();
+		*/
+	}
+
+//	@SafeVarargs
+//	static //<NumericGene<? extends Number, ?>>
+//	Genotype<
+//		N extends NumericGene<? extends Number, N>
+//	> of(
+//		final Chromosome<N extends NumericGene<? extends Number, ?>> first,
+//		final Chromosome<? extends NumericGene<? extends Number, ?>>... rest
+//	) {
+//		return Genotype.of(
+//			(Chromosome)first,
+//			(Chromosome[]) rest
+//		);
+//	}
+//
+//	public static <T> Codec<T, ? extends NumericGene<? extends Number, ?>> codec(
+//		final Factory<Genotype<? extends NumericGene<? extends Number, ?>>> encoding,
+//		final Function<Genotype<? extends NumericGene<? extends Number, ?>>, T> decoder
+//	) {
+//		return null;
+//	}
+
+	//static class NumberGene<>
 
 }
