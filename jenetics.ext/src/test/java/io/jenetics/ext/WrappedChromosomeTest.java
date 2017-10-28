@@ -70,20 +70,42 @@ public class WrappedChromosomeTest {
 	public void foo() {
 		//final Genotype<NumericGene<Number, NumericGene<?, ?>>>
 
-		NumericGene<Double, DoubleGene> dg = DoubleGene.of(0, 1);
-		NumericGene<Integer, IntegerGene> ig = IntegerGene.of(0, 1);
+//		NumericGene<Double, DoubleGene> dg = DoubleGene.of(0, 1);
+//		NumericGene<Integer, IntegerGene> ig = IntegerGene.of(0, 1);
+//
+//		Gene<? extends Number, ?> ag = ig;
+//		ag = dg;
+//
+//		Genotype<? extends Gene<Number, ?>> gt = null;
+//
+//		Engine<? extends Gene<? extends Number, ?>, Double> engine = null;
+//		EvolutionStream<? extends Gene<? extends Number, ?>, Double> stream = engine.stream();
 
-		NumericGene<? extends Number, ?> ag = ig;
-		ag = dg;
+		Genotype<AlleleGene<Number>> agt = genotypes(
+			DoubleChromosome.of(1, 2),
+			IntegerChromosome.of(0, 10)
+		);
 
-		Genotype<? extends NumericGene<? extends Number, ?>> gt = null;
+		System.out.println(agt);
 
-		Engine<? extends NumericGene<? extends Number, ?>, Double> engine = null;
-		EvolutionStream<? extends NumericGene<? extends Number, ?>, Double> stream = engine.stream();
-
-//		stream
-//			.limit(Limits.bySteadyFitness(12))
+//		final Engine<AlleleGene<Number>, Double> engine = Engine
+//			.builder(
+//				gt -> gt.stream()
+//					.flatMap(Chromosome::stream)
+//					.mapToDouble(a -> a.getAllele().doubleValue())
+//					.sum(),
+//				agt)
+//			.build();
+//
+//		Genotype<AlleleGene<Number>> result = engine.stream()
+//			.limit(100)
 //			.collect(EvolutionResult.toBestGenotype());
+//
+//		System.out.println(result);
+
+		//Genotype<? extends Gene<Number, ?>> result = stream
+		//	.limit(Limits.bySteadyFitness(12))
+			//.collect(EvolutionResult.toBestGenotype());
 
 
 		//		final Genotype<NumericGene<? extends Number, ?>> genotype = of(
@@ -106,6 +128,15 @@ public class WrappedChromosomeTest {
 		final Engine<? extends NumericGene<? extends Number, ?>, Double> engine =
 			Engine.builder(g -> 0.0, codec).build();
 		*/
+	}
+
+	@SuppressWarnings("unchecked")
+	@SafeVarargs
+	static <A> Genotype<AlleleGene<A>> genotypes(
+		final Chromosome<? extends Gene<? extends A, ?>> first,
+		final Chromosome<? extends Gene<? extends A, ?>>... rest
+	) {
+		return (Genotype<AlleleGene<A>>)Genotype.of((Chromosome)first, (Chromosome[]) rest);
 	}
 
 //	@SafeVarargs
