@@ -15,19 +15,18 @@
  * limitations under the License.
  *
  * Author:
- *    Franz Wilhelmstötter (franz.wilhelmstoetter@gmx.at)
+ *    Franz Wilhelmstötter (franz.wilhelmstoetter@gmail.at)
  */
-package org.jenetix;
+package io.jenetics.ext;
 
 import static java.util.Objects.requireNonNull;
 
 import java.util.Iterator;
 
-import org.jenetics.internal.util.Lazy;
-
-import org.jenetics.Chromosome;
-import org.jenetics.Gene;
-import org.jenetics.util.ISeq;
+import io.jenetics.Chromosome;
+import io.jenetics.Gene;
+import io.jenetics.internal.util.Lazy;
+import io.jenetics.util.ISeq;
 
 /**
  * @author <a href="mailto:franz.wilhelmstoetter@gmx.at">Franz Wilhelmstötter</a>

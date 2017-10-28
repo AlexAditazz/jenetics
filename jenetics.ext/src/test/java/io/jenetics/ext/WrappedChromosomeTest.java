@@ -17,15 +17,15 @@
  * Author:
  *    Franz Wilhelmstötter (franz.wilhelmstoetter@gmx.at)
  */
-package org.jenetix;
+package io.jenetics.ext;
 
 import org.testng.annotations.Test;
 
-import org.jenetics.DoubleChromosome;
-import org.jenetics.Genotype;
-import org.jenetics.IntegerChromosome;
-import org.jenetics.Mutator;
-import org.jenetics.engine.Engine;
+import io.jenetics.DoubleChromosome;
+import io.jenetics.Genotype;
+import io.jenetics.IntegerChromosome;
+import io.jenetics.Mutator;
+import io.jenetics.engine.Engine;
 
 /**
  * @author <a href="mailto:franz.wilhelmstoetter@gmx.at">Franz Wilhelmstötter</a>
